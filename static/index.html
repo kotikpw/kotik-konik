@@ -24,18 +24,18 @@
     <p><a href="http://kotik.iem.pw.edu.pl">kotik.iem.pw.edu.pl</a>
   </header>
 
-  <form class="form-horizontal">
+  <form id="registration" class="form-horizontal" method="POST" action="register">
     <div class="control-group">
       <label class="control-label" for="firstname">Nazywam się</label>
       <div class="controls">
-        <input type="text" id="firstname" placeholder="Imię">
-        <input type="text" id="lastname" placeholder="Nazwisko">
+        <input type="text" id="firstname" name="firstname" placeholder="Imię">
+        <input type="text" id="lastname" name="lastname" placeholder="Nazwisko">
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="nick">Ale mówią na mnie</label>
       <div class="controls">
-        <input type="text" id="nick" placeholder="Nick">
+        <input type="text" id="nick" name="nick" placeholder="Nick">
       </div>
     </div>
     <div class="control-group">
@@ -43,6 +43,7 @@
       <div class="controls">
         <video id="video" width="265" height="200" autoplay style="border: 1px solid #ccc"></video>
         <canvas id="canvas" width="265" height="200" style="border: 1px solid #ccc"></canvas>
+        <input type="hidden" id="avatar" name="avatar">
       </div>
     </div>
     <div class="control-group">
