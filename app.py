@@ -1,14 +1,22 @@
 import web
 from web.contrib.template import render_jinja
 
-urls = ('/(.*)', 'Home')
+urls = ('/', 'Home',
+        '/register', 'Register')
 
 app = web.application(urls, globals())
 render = render_jinja('static', encoding = 'utf-8')
 
 class Home:
-    def GET(self, name):
-        return render.index(name=name)
+    def GET(self):
+        return render.index()
+
+class Register:
+    def POST(self):
+        i = web.input()
+        print i.firstname
+        print i.avatar
+        return render.success()
 
 if __name__ == "__main__":
     app.run()
