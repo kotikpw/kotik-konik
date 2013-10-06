@@ -30,4 +30,7 @@ window.addEventListener("DOMContentLoaded", function() {
 	document.getElementById("canvas").addEventListener("click", function() {
 		context.drawImage(unknownImage, 0, 0, 265, 200);
         });
+	document.getElementById("registration").addEventListener("submit", function() {
+		document.getElementById("avatar").value = canvas.toDataURL();
+	});
 }, false);
