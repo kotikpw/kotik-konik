@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy.orm import relationship
 
 engine = create_engine('sqlite:///kotik.db', echo=True)
 
@@ -24,6 +25,7 @@ class User(Base):
     known_technologies = Column(String)
     wants_to_learn = Column(String)
     willingness_to_attend_meetings = Column(String)
+    given_answers = relationship("GivenAnswer")
 
     def __init__(self, firstname, lastname, nickname, email):
         self.firstname = firstname
@@ -35,10 +37,56 @@ class User(Base):
        fullname = "%s %s" % (self.firstname, self.lastname)
        return "<User('%s','%s', '%s', '%s')>" % (fullname, self.nickname, self.email)
 
+class Question(Base):
+    __tablename__ = 'questions'
+
+    id = Column(Integer, primary_key=True)
+    question = Column(String, nullable=False)
+    answers = relationship("Answer")
+
+    def __init__(self, question):
+        self.question = question
+
+    def __repr__(self):
+       return "<Question('%i', '%s')>" % (self.id, self.question)
+
+class Answer(Base):
+    __tablename__ = 'answers'
+
+    id = Column(Integer, primary_key=True)
+    answer = Column(String, nullable=False)
+    correct = Column(Boolean, nullable=False, default=False)
+    question_id = Column(Integer, ForeignKey('questions.id'))
+    given_answers = relationship("GivenAnswer")
+
+    def __init__(self, answer, correct):
+	self.answer = answer
+	self.correct = correct
+
+    def __repr__(self):
+       return "<Answer('%i', '%i')>" % (self.aid, self.question_id)
+
+class GivenAnswer(Base):
+    __tablename__ = 'givenanswers'
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.uid'))
+    answers_id = Column(Integer, ForeignKey('answers.id'))
+    checked = Column(Boolean, nullable=False, default=False)
+
+    def __init__(self, checked):
+	self.checked = checked
+
+    def __repr__(self):
+       return "<GivenAnsert('%i', '%i', '%i')>" % (self.id, self.user_id, self.answers_id)
+
 
 users_table = User.__table__
+questions_table = Question.__table__
+answers_table = Answer.__table__
+given_answers_table = GivenAnswer.__table__
 metadata = Base.metadata
-
+metadata = Base.metadata
 
 if __name__ == "__main__":
     metadata.create_all(engine)

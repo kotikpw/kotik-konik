@@ -7,12 +7,14 @@ from web.contrib.template import render_jinja
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.exc import IntegrityError
 from base64 import b64decode
+from random import shuffle
 
 from models import *
 
 prefix = '/konik'
 urls = (prefix + '/', 'Home',
         prefix + '/register', 'Register',
+        prefix + '/quiz', 'Quiz',
         prefix + '/avatar/(.*)', 'Avatar')
 
 def sqlalchemy_processor(handler):
@@ -100,6 +102,18 @@ class Avatar:
         web.header("Content-Type", "image/png")
         web.header("Content-Disposition", "attachment;filename=\"%s\"" % 'avatar.png')
         return self._avatar_as_bytestream_if_available(avatar)
+
+class Quiz:
+    limit = 10
+
+    def generate_quesions(self):
+	full_list = context.orm.query(Question).all()
+	shuffle(full_list)
+	return full_list[:self.limit]
+
+    def GET(self):
+	question_list = self.generate_quesions()
+        return render.quiz(question_list=question_list)
 
 app.add_processor(sqlalchemy_processor)
 
