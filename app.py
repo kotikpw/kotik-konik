@@ -33,8 +33,32 @@ class Home:
 class Register:
     def POST(self):
         i = web.input()
-        new_user = User(i.firstname, i.lastname, i.nickname)
-        context.orm.add(new_user)
+        firstname = i.get('firstname')
+        lastname = i.get('lastname')
+        nickname = i.get('nickname')
+        new_user = User(firstname, lastname, nickname)
+        if i.has_key('avatar'):
+            new_user.avatar = i.avatar
+        if i.has_key('university'):
+            new_user.university = i.university
+        if i.has_key('faculty'):
+            new_user.faculty = i.faculty
+        if i.has_key('github'):
+            new_user.github_username = i.github
+        if i.has_key('reddit'):
+            new_user.reddit_username = i.reddit
+        if i.has_key('unix'):
+            new_user.linux_distribution = i.unix
+        if i.has_key('iknow'):
+            new_user.known_technologies = i.iknow
+        if i.has_key('ineed'):
+            new_user.wants_to_learn = i.ineed
+        if i.has_key('imeet'):
+            new_user.willingness_to_meet = i.imeet
+        try:
+            context.orm.add(new_user)
+        except Exception, e:
+            raise e
         return render.success()
 
 app.add_processor(load_sqlalchemy)
