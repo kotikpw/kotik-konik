@@ -29,6 +29,7 @@ def sqlalchemy_processor(handler):
         context.orm.commit()
 
 app = application(urls, globals())
+wsgi = app.wsgifunc()
 render = render_jinja('static', encoding = 'utf-8')
 
 class Home:
