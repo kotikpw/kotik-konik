@@ -21,7 +21,7 @@ class User(Base):
     linux_distribution = Column(String)
     known_technologies = Column(String)
     wants_to_learn = Column(String)
-    willingness_to_attend_meetings = Column(Integer)
+    willingness_to_attend_meetings = Column(String)
 
     def __init__(self, firstname, lastname, nickname):
         self.firstname = firstname
