@@ -43,6 +43,8 @@ class Register:
             new_user.university = i.university
         if i.has_key('faculty'):
             new_user.faculty = i.faculty
+        if i.has_key('year'):
+            new_user.year_of_study = i.year
         if i.has_key('github'):
             new_user.github_username = i.github
         if i.has_key('reddit'):
