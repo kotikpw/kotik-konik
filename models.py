@@ -17,6 +17,7 @@ class User(Base):
     avatar = Column(String)
     university = Column(String)
     faculty = Column(String)
+    year_of_study = Column(Integer)
     github_username = Column(String)
     reddit_username = Column(String)
     linux_distribution = Column(String)
