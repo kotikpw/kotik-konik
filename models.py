@@ -13,6 +13,7 @@ class User(Base):
     firstname = Column(String, nullable=False)
     lastname = Column(String, nullable=False)
     nickname = Column(String, nullable=False)
+    email = Column(String, nullable=False)
     avatar = Column(String)
     university = Column(String)
     faculty = Column(String)
@@ -23,14 +24,15 @@ class User(Base):
     wants_to_learn = Column(String)
     willingness_to_attend_meetings = Column(String)
 
-    def __init__(self, firstname, lastname, nickname):
+    def __init__(self, firstname, lastname, nickname, email):
         self.firstname = firstname
         self.lastname = lastname
         self.nickname = nickname
+        self.email = email
 
     def __repr__(self):
        fullname = "%s %s" % (self.firstname, self.lastname)
-       return "<User('%s','%s', '%s')>" % (fullname, self.nickname)
+       return "<User('%s','%s', '%s', '%s')>" % (fullname, self.nickname, self.email)
 
 
 users_table = User.__table__
