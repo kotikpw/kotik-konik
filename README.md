@@ -6,7 +6,7 @@ Strona rejestracji kotik
 Zależności
 ==========
 
-* uwsgi (apt-get install uwsgi-core uwsgi-plugins-python)
+* uwsgi (apt-get install uwsgi-core uwsgi-plugin-python)
 * sqlalchemy (pip install sqlalchemy)
 * sqlite3 (apt-get install sqlite3)
 * webpy (pip install webpy)
