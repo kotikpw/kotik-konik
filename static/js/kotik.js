@@ -5,7 +5,7 @@ window.addEventListener("DOMContentLoaded", function() {
 	context = canvas.getContext("2d"),
 	video = document.getElementById("video"),
 	videoObj = { "video": true },
-	errBack = function(error) { console.log("Video capture error: ", error.code); };
+	errBack = function(error) { console.log("Video capture error: ", error.code); video.className = 'hidden';};
         nonDefaultImage = false;
 	unknownImage = new Image;
 	unknownImage.onload = function() {
@@ -23,7 +23,7 @@ window.addEventListener("DOMContentLoaded", function() {
 			video.src = window.webkitURL.createObjectURL(stream);
 			video.play();
 		}, errBack);
-	}
+        }
 
 	document.getElementById("video").addEventListener("click", function() {
 		nonDefaultImage = true;

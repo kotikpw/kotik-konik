@@ -1,3 +1,7 @@
 input#year {
   width: 7em;
 }
+
+video.hidden {
+  display: none;
+}
