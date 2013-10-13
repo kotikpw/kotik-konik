@@ -25,6 +25,11 @@
     <p><a href="http://kotik.iem.pw.edu.pl">kotik.iem.pw.edu.pl</a>
   </header>
 
+  {% if error is defined %}
+  <div class="alert alert-error">
+    {{ error }}
+  </div>
+  {% endif %}
   <form id="registration" class="form-horizontal" method="POST" action="register">
     <div class="control-group">
       <label class="control-label" for="firstname">Nazywam się</label>
