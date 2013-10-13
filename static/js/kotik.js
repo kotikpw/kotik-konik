@@ -6,11 +6,12 @@ window.addEventListener("DOMContentLoaded", function() {
 	video = document.getElementById("video"),
 	videoObj = { "video": true },
 	errBack = function(error) { console.log("Video capture error: ", error.code); };
+        nonDefaultImage = false;
 	unknownImage = new Image;
 	unknownImage.onload = function() {
 		context.drawImage(unknownImage, 0, 0, 265, 200);
 	};
-	unknownImage.src = "static/img/unknown.jpg";
+	unknownImage.src = "/avatar/";
 	// Put video listeners into place
 	if(navigator.getUserMedia) { // Standard
 		navigator.getUserMedia(videoObj, function(stream) {
@@ -25,12 +26,15 @@ window.addEventListener("DOMContentLoaded", function() {
 	}
 
 	document.getElementById("video").addEventListener("click", function() {
+		nonDefaultImage = true;
 		context.drawImage(video, 0, 0, 265, 200);
         });
 	document.getElementById("canvas").addEventListener("click", function() {
+		nonDefaultImage = false;
 		context.drawImage(unknownImage, 0, 0, 265, 200);
         });
 	document.getElementById("registration").addEventListener("submit", function() {
-		document.getElementById("avatar").value = canvas.toDataURL();
+		if (nonDefaultImage)
+			document.getElementById("avatar").value = canvas.toDataURL();
 	});
 }, false);
