@@ -13,7 +13,7 @@ class User(Base):
     firstname = Column(String, nullable=False)
     lastname = Column(String, nullable=False)
     nickname = Column(String, nullable=False)
-    email = Column(String, nullable=False)
+    email = Column(String, nullable=False, unique=True)
     avatar = Column(String)
     university = Column(String)
     faculty = Column(String)
