@@ -10,9 +10,10 @@ from base64 import b64decode
 
 from models import *
 
-urls = ('/', 'Home',
-        '/register', 'Register',
-        '/avatar/(.*)', 'Avatar')
+prefix = '/konik'
+urls = (prefix + '/', 'Home',
+        prefix + '/register', 'Register',
+        prefix + '/avatar/(.*)', 'Avatar')
 
 def sqlalchemy_processor(handler):
     # after handling a request we are autocommiting all changes
