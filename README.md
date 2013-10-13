@@ -28,4 +28,5 @@ awatar, więc najlepiej uruchamiać aplikację przez NGINX z kilkoma procesami.
 W tym celu:
 
 $ vim uwsgi.ini # zmodyfikuj chdir
+
 $ uwsgi -C uwsgi.ini
