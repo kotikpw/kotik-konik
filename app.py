@@ -38,7 +38,8 @@ class Register:
         firstname = i.get('firstname')
         lastname = i.get('lastname')
         nickname = i.get('nickname')
-        new_user = User(firstname, lastname, nickname)
+        email = i.get('email')
+        new_user = User(firstname, lastname, nickname, email)
         if i.has_key('avatar'):
             new_user.avatar = i.avatar
         if i.has_key('university'):
