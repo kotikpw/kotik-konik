@@ -1,9 +1,11 @@
+# -*- encoding: utf-8
 import web
 from web import HTTPError
 from web import application
 from web import ctx as context
 from web.contrib.template import render_jinja
 from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.exc import IntegrityError
 from base64 import b64decode
 
 from models import *
@@ -62,9 +64,11 @@ class Register:
             new_user.willingness_to_meet = i.imeet
         try:
             context.orm.add(new_user)
-        except Exception, e:
-            raise e
-        return render.success()
+            context.orm.commit()
+        except IntegrityError, e:
+            context.orm.rollback()
+            return render.index(error=u"Podany e-mail jest już zajęty")
+        return render.success(email=email)
 
 class Avatar:
     def _avatar_as_bytestream_if_available(self, avatar):
