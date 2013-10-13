@@ -1,0 +1,286 @@
+html {
+    background-color: #d7d0c6;
+    background-image: url(/static/img/layout/bg/main-gradient.png),
+                      url(/static/img/layout/bg/main-2.png),
+                      url(/static/img/layout/bg/main.png);
+
+    background-repeat: no-repeat, repeat-x, repeat;
+    background-position: center 99px, center 99px, center;
+}
+
+a {
+    color: #ee5a00;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #434343;
+}
+
+#main-header {
+    background: #1e1f1f; /* Old browsers */
+    background: -moz-linear-gradient(top, #1e1f1f 0%, #313132 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1e1f1f), color-stop(100%,#313132)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #1e1f1f 0%,#313132 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #1e1f1f 0%,#313132 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #1e1f1f 0%,#313132 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #1e1f1f 0%,#313132 100%); /* W3C */
+
+    position: relative;
+    font-family: "Designosaur", sans-serif;
+    color: white;
+
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
+}
+
+#header-content {
+    width: 934px;
+    height: 99px;
+    margin: auto;
+    position: relative;
+}
+
+#header-info {
+    display: inline-block;
+    position: relative;
+    padding-right: 1em;
+}
+
+#home {
+    text-decoration: none;
+}
+
+#logo {
+    background: url(/static/img/layout/logo.png) no-repeat;
+    width: 96px;
+    height: 96px;
+
+    overflow: hidden;
+    text-indent: 1000px;
+
+    position: absolute;
+    left: 100%;
+    top: 0;
+
+    -webkit-transform: rotate(0);
+    -webkit-transition: -webkit-transform 0.2s;
+    -moz-transform: rotate(0);
+    -moz-transition: -moz-transform 0.2s;
+    -o-transform: rotate(0);
+    -o-transition: -ms-transform 0.2s;
+    -ms-transform: rotate(0);
+    -ms-transition: -ms-transform 0.2s;
+    transform: rotate(0);
+    transition: transform 0.2s;
+}
+
+#logo:hover {
+    -webkit-transform: rotate(20deg);
+    -moz-transform: rotate(20deg);
+    -o-transform: rotate(20deg);
+    -ms-transform: rotate(20deg);
+    transform: rotate(20deg);
+}
+
+h1 {
+    position: relative;
+    color: rgba(184, 184, 184, 0.52);
+    font-size: 2em;
+    text-shadow: 1px 1px 0 white;
+    font-weight: normal;
+    padding-top: 0.25em;
+}
+
+nav {
+    margin-top: 1em;
+    height: 2em;
+    float: left;
+}
+
+nav li {
+    float: left;
+    margin-right: 2em;
+}
+
+nav a,
+#lang-switch a {
+    color: #8c8a87;
+    font-size: 1.3em;
+    text-decoration: none;
+}
+
+nav a:hover,
+#lang-switch a:hover,
+nav .active a {
+    color: #d7d0c6;
+}
+
+#lang-switch {
+    margin-top: 1em;
+    float: right;
+}
+
+footer {
+    font-family: "Trebuchet MS", "Trebuchet", "Helvetica", sans-serif;
+
+    color: #646464;
+    text-align: center;
+
+    margin-bottom: 0.5em;
+}
+
+
+label,
+input,
+button,
+select,
+textarea {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+}
+input,
+button,
+select,
+textarea {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  display: inline-block;
+  height: 20px;
+  padding: 4px 6px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #555555;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+input,
+textarea,
+.uneditable-input {
+  width: 206px;
+}
+textarea {
+  height: auto;
+}
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border linear .2s, box-shadow linear .2s;
+  -moz-transition: border linear .2s, box-shadow linear .2s;
+  -o-transition: border linear .2s, box-shadow linear .2s;
+  transition: border linear .2s, box-shadow linear .2s;
+}
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+  border-color: rgba(82, 168, 236, 0.8);
+  outline: 0;
+  outline: thin dotted \9;
+  /* IE6-9 */
+
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+  -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
+}
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 4px 0 0;
+  *margin-top: 0;
+  /* IE7 */
+
+  margin-top: 1px \9;
+  /* IE8-9 */
+
+  line-height: normal;
+}
+input[type="file"],
+input[type="image"],
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+input[type="radio"],
+input[type="checkbox"] {
+  width: auto;
+}
+select,
+input[type="file"] {
+  height: 30px;
+  /* In IE7, the height of the select element cannot be changed by height, only font-size */
+
+  *margin-top: 4px;
+  /* For IE7, add top margin to align select with labels */
+
+  line-height: 30px;
+}
+select {
+  width: 220px;
+  border: 1px solid #cccccc;
+  background-color: #ffffff;
+}
+select[multiple],
+select[size] {
+  height: auto;
+}
+select:focus,
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
