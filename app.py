@@ -73,7 +73,7 @@ class Register:
 
 class Avatar:
     def _avatar_as_bytestream_if_available(self, avatar):
-        if avatar is not None:
+        if avatar is not None and len(avatar) > 0:
             return self._avatar_as_bytestream(avatar)
         else:
             return self._empty_avatar_bytestream(avatar)
@@ -95,7 +95,8 @@ class Avatar:
             user = context.orm.query(User).filter_by(email=email).first()
             if user is not None:
                 avatar = user.avatar
-        web.header("Content-Type", "images/png")
+        web.header("Content-Type", "image/png")
+        web.header("Content-Disposition", "attachment;filename=\"%s\"" % 'avatar.png')
         return self._avatar_as_bytestream_if_available(avatar)
 
 app.add_processor(sqlalchemy_processor)
