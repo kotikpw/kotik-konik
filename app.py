@@ -14,7 +14,8 @@ urls = ('/', 'Home',
         '/register', 'Register',
         '/avatar/(.*)', 'Avatar')
 
-def load_sqlalchemy(handler):
+def sqlalchemy_processor(handler):
+    # after handling a request we are autocommiting all changes
     context.orm = scoped_session(sessionmaker(bind=engine))
     try:
         return handler()
@@ -88,16 +89,16 @@ class Avatar:
         avatar_bytes = b64decode(avatar_in_base64)
         return avatar_bytes
 
-    def GET(self, nickname):
+    def GET(self, email):
         avatar = None
-        if nickname is not None:
-            user = context.orm.query(User).filter_by(nickname=nickname).first()
+        if email is not None:
+            user = context.orm.query(User).filter_by(email=email).first()
             if user is not None:
                 avatar = user.avatar
         web.header("Content-Type", "images/png")
         return self._avatar_as_bytestream_if_available(avatar)
 
-app.add_processor(load_sqlalchemy)
+app.add_processor(sqlalchemy_processor)
 
 if __name__ == "__main__":
     app.run()
