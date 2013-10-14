@@ -1,5 +1,6 @@
 # -*- encoding: utf-8
 import web
+import urllib2
 from web import HTTPError
 from web import application
 from web import ctx as context
@@ -31,6 +32,33 @@ def sqlalchemy_processor(handler):
     finally:
         context.orm.commit()
 
+class HeadRequest(urllib2.Request):
+    def get_method(self):
+        return "HEAD"
+
+def check_url(url):
+    request = HeadRequest(url)
+    response = urllib2.urlopen(request)
+    valid = response.getcode() == 200
+    if not valid:
+        print "Response code: %d" % response.getcode()
+    return valid
+
+def check_github_username(github_username):
+    if check_url('https://github.com/%s' % github_username):
+        return True
+    return False
+
+def check_reddit_username(reddit_username):
+    if check_url('http://www.reddit.com/user/%s' % reddit_username):
+        return True
+    return False
+
+def check_linux_distribution(linux_distribution):
+    if check_url('http://distrowatch.com/table.php?distribution=%s' % linux_distribution):
+        return True
+    return False
+
 def empty_or_none(value, default=None):
     if not value or not len(value):
         return default
@@ -59,6 +87,7 @@ class Register:
         lastname = empty_or_none(i.get('lastname'), default='Molibdenowy')
         nickname = empty_or_none(i.get('nickname'), default='nie_wiadomo_kto')
         email = empty_or_none(i.get('email'))
+        info = []
 
 	new_user = context.orm.query(User).filter_by(email=email).filter_by(active=False).first()
 	if new_user == None:
@@ -78,10 +107,16 @@ class Register:
             new_user.year_of_study = i.year
         if i.has_key('github'):
             new_user.github_username = i.github
+            if check_github_username(i.github):
+                info.append(u"Dodatkowe punkty za konto na GitHubie!")
         if i.has_key('reddit'):
             new_user.reddit_username = i.reddit
+            if check_reddit_username(i.reddit):
+                info.append(u"Dodatkowe punkty za konto na reddit!")
         if i.has_key('unix'):
             new_user.linux_distribution = i.unix
+            if check_linux_distribution(i.unix):
+                info.append(u"Dodatkowe punkty za konto na używanie %s!" % i.unix)
         if i.has_key('iknow'):
             new_user.known_technologies = i.iknow
         if i.has_key('ineed'):
@@ -89,18 +124,20 @@ class Register:
         if i.has_key('imeet'):
             new_user.willingness_to_meet = i.imeet
 	new_user.active = True
+	profile_progress = new_user.get_profile_progress_in_percents()
+        
         try:
             context.orm.add(new_user)
             context.orm.commit()
         except IntegrityError, e:
             context.orm.rollback()
             if email is None:
-                return render.registration(error=u"Podaj adres e-mail")
+                return render.registration(errors=[u"Podaj adres e-mail"])
             else:
-                return render.registration(error=u"Podany e-mail jest już zajęty")
+                return render.registration(errors=[u"Podany e-mail jest już zajęty"])
         return render.success(firstname=firstname, lastname=lastname, nickname=nickname, email=email, \
-				success=u"Witaj %s!" % nickname, \
-				profile_progress=new_user.get_profile_progress_in_percents())
+				successes=[u"Witaj %s!" % nickname], info=info, \
+				profile_progress=profile_progress)
 
 class Avatar:
     def _avatar_as_bytestream_if_available(self, avatar):
