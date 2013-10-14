@@ -5,3 +5,12 @@ input#year {
 video.hidden {
   display: none;
 }
+
+.answers {
+  margin-bottom: 2px;
+}
+
+.question {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
