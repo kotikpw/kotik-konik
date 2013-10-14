@@ -1,55 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Kotik Template Prototype</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+{% extends "index_sea.html" %}
 
-        <script src="/static/js/kotik.js"></script>
-        <link rel="stylesheet" href="/static/css/some-bootstrap.css">
-
-        <link rel="stylesheet" href="/static/css/kotik.css" />
-        <link rel="stylesheet" href="/static/css/layout/reset.css" />
-        <link rel="stylesheet" href="/static/css/layout/fonts.css" />
-        <link rel="stylesheet" href="/static/css/layout/main.css" />
-        <link rel="stylesheet" href="/static/css/layout/events/main-event.css" />
-        <link rel="stylesheet" href="/static/css/layout/events/other-events.css" />
-
-        <!--[if IE]>
-        <link rel="stylesheet" href="css/ie-fix.css" />
-        <![endif]-->
-    </head>
-    <body>
-        <header id="main-header">
-            <div id="header-content">
-                <div id="header-info">
-                    <a href="#" id="home">
-                        <h1>Koło Otwartych Technik Informacyjnych i Komputerowych</h1>
-                        <div id="logo">KOTIK</div>
-                    </a>
-
-<!--
-                    <nav>
-                        <ul>
-                            <li class="active"><a href="#">O kole</a></li>
-                            <li><a href="#">Wiki</a></li>
-                            <li><a href="#">Dołącz</a></li>
-                            <li><a href="#">Newsletter</a></li>
-                        </ul>
-                    </nav>
-                    <div id="lang-switch">
-                        <a href="#">English</a>
-                    </div>
--->
-                </div>
-            </div>
-        </header>
-        <section id="main-event">
-            <article class="event">
-                {% if error is defined %}
-  <div class="alert alert-error">
-    {{ error }}
-  </div>
-  {% endif %}
+{% block context %}
   <form id="registration" class="form-horizontal" method="POST">
     <div class="control-group">
       <label class="control-label" for="nickname">Mówią na mnie</label>
@@ -77,12 +28,4 @@
       <button type="button" class="btn">Rezygnuję</button>
     </div>
   </form>
-
-            </article>
-        </section>
-        
-        <footer>
-            Copyright © 2013 – Template by <a href="#">KOTIK</a> on the <a href="#">GPLv3</a> license.
-        </footer>
-</body>
-</html>
+{% endblock %}

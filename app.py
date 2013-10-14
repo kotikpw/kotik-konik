@@ -37,7 +37,7 @@ render = render_jinja('static', encoding = 'utf-8')
 
 class Home:
     def GET(self):
-        return render.index_sea()
+        return render.registration()
 
 class Register:
     def POST(self):
@@ -49,7 +49,7 @@ class Register:
 
 	new_user = context.orm.query(User).filter_by(email=email).filter_by(active=False).first()
 	if new_user == None:
-		new_user = User(firstname, lastname, nickname, email)
+	    new_user = User(firstname, lastname, nickname, email)
 	else:
 	    new_user.firstname = firstname
 	    new_user.lastname = lastname
@@ -81,7 +81,7 @@ class Register:
             context.orm.commit()
         except IntegrityError, e:
             context.orm.rollback()
-            return render.index(error=u"Podany e-mail jest już zajęty")
+            return render.registration(error=u"Podany e-mail jest już zajęty")
         return render.success(email=email)
 
 class Avatar:
