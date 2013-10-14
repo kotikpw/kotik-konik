@@ -126,24 +126,50 @@ class Quiz:
 
     def POST(self):
         i = web.input(answer=[])
-        firstname = i.get('firstname')
-        lastname = i.get('lastname')
         nickname = i.get('nickname')
         email = i.get('email')
         
 	user = context.orm.query(User).filter_by(email=email).first()
-	if user == None:
-		user = User(firstname, lastname, nickname, email)
-       
-       	given_answers = []
-		
-	for a in i.get('answer'):
-		ga = GivenAnswer(1)
-		# todo excpetion
-		ga.answers_id = int(a) 
-		given_answers.append(ga)
+	if user is None:
+		user = User('', '', nickname, email)
+
+        user.quiz_points = 0  
+	user.given_answers = []
+        
+        form_keys = i.keys()
+
+	for question_key in form_keys:
+		question_id = None
+		try:
+			question_id = int(question_key)
+		except Exception:
+			pass
+
+		if question_id is None:
+			continue
+
+		question = context.orm.query(Question).filter_by(id=question_id).first()
+		if question is None:
+			continue
+
+		all_correct = True
+		for answer_key in i.get(question_key):
+			try:
+				answer_id = int(answer_key)
+			except Exception:
+				pass
+
+			if answer_id is None:
+				all_correct = False
+				continue
+
+                        answer = context.orm.query(Answer).filter_by(id=answer_id).first()
+                        if answer is None or answer.correct == False:
+				all_correct = False
+
+		if all_correct:
+			user.quiz_points += 10
 	
-	user.given_answers = given_answers
 	context.orm.add(user)
 	return render.quiz(question_list=i.get('answer'))
 

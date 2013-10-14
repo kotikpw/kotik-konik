@@ -15,6 +15,7 @@ class User(Base):
     lastname = Column(String, nullable=False)
     nickname = Column(String, nullable=False)
     email = Column(String, nullable=False, unique=True)
+    quiz_points = Column(Integer, default=0)
     avatar = Column(String)
     university = Column(String)
     faculty = Column(String)
@@ -36,7 +37,7 @@ class User(Base):
 
     def __repr__(self):
        fullname = "%s %s" % (self.firstname, self.lastname)
-       return "<User('%s','%s', '%s', '%s')>" % (fullname, self.nickname, self.email)
+       return "<User('%s', '%s', '%s')>" % (fullname, self.nickname, self.email)
 
 class Question(Base):
     __tablename__ = 'questions'
@@ -72,14 +73,13 @@ class GivenAnswer(Base):
 
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('users.uid'))
-    answers_id = Column(Integer, ForeignKey('answers.id'))
-    checked = Column(Boolean, nullable=False, default=False)
+    answer_id = Column(Integer, ForeignKey('answers.id'))
 
-    def __init__(self, checked):
-	self.checked = checked
+    def __init__(self, answer_id):
+	self.answer_id = answer_id
 
     def __repr__(self):
-       return "<GivenAnswer('%i')>" % (self.id)
+       return "<GivenAnswer('%i', '%i')>" % (self.id, self.answer_id)
 
 
 users_table = User.__table__

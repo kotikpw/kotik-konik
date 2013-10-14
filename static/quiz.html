@@ -32,14 +32,7 @@
   {% endif %}
   <form id="registration" class="form-horizontal" method="POST">
     <div class="control-group">
-      <label class="control-label" for="firstname">Nazywam się</label>
-      <div class="controls">
-        <input type="text" id="firstname" name="firstname" placeholder="Imię">
-        <input type="text" id="lastname" name="lastname" placeholder="Nazwisko">
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="nickname">Ale mówią na mnie</label>
+      <label class="control-label" for="nickname">Mówią na mnie</label>
       <div class="controls">
         <input type="text" id="nickname" name="nickname" placeholder="Nick">
         <input type="email" id="email" name="email" placeholder="E-mail">
@@ -53,7 +46,7 @@
 	<div class="controls">
 	    {% for a in q.answers %}
                 <div class="answers">
-                    <input type="checkbox" name="answer" value="{{ a.id }}"> {{ a.answer }}
+                    <input type="checkbox" name="{{ q.id }}" value="{{ a.id }}"> {{ a.answer }}
                 </div>
 		{{ loop.cycle('', '<br/>') }}
 	    {% endfor %}
