@@ -1,0 +1,167 @@
+.event {
+    font-family: "Designosaur", sans-serif;
+    background: url(/static/img/layout/bg/event.png);
+    padding: 1em;
+
+    position: relative;
+}
+
+.event p {
+    font-family: "Trebuchet MS", "Trebuchet", "Helvetica", sans-serif;
+    line-height: 1.3em;
+    margin-top: 1em;
+
+    color: #434343;
+}
+
+.event .content {
+    width: 65%;
+}
+
+.event .content footer {
+    clear: both;
+    height: 90px;
+}
+
+.event .visual {
+    float: right;
+    position: relative;
+
+    width: 35%;
+    height: 370px;
+}
+
+#main-event {
+    width: 1080px;
+
+    margin: 1em auto;
+
+    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+#main-event .event {
+    padding: 1.2em;
+    min-height: 375px;
+}
+
+#main-event h2 {
+    font-size: 2em;
+
+    text-shadow: 1px 1px 0 white;
+}
+
+#main-event .event-pic {
+    width: 363px;
+    position: absolute;
+
+    top: 1em;
+    right: 2em;
+
+    border: 8px solid white;
+    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.3);
+
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+    -o-transform: rotate(2deg);
+    -ms-transform: rotate(2deg);
+    transform: rotate(2deg);
+}
+
+#main-event .event .info {
+    width: 80%;
+    float: left;
+}
+
+#main-event .button {
+    display: block;
+    position: relative;
+    bottom: 70px;
+
+    width: 49%;
+    height: 70px;
+
+    line-height: 70px;
+    text-align: center;
+
+    background: url(/static/img/layout/event/button.png);
+    border-radius: 4px;
+    border-left: 1px solid #9cc496;
+    border-top: 1px solid #9cc496;
+
+    border-right: 1px solid #20461d;
+    border-bottom: 1px solid #20461d;
+
+    box-shadow: inset 1px 1px 0px 0px #bcd2b9,
+                inset -1px -1px 0px 0px #3e6d39;
+
+    font-family: "Designosaur", sans-serif;
+
+    text-decoration: none;
+}
+
+#main-event .button .button-text {
+    left: 1px;
+    top: 1px;
+
+    position: relative;
+    color: rgba(72, 106, 69, 0.25);
+    font-size: 1.5em;
+
+    text-shadow: -1px -1px 0 white;
+}
+
+#main-event .button:hover {
+    background-position: 0 70px;
+    box-shadow: inset 1px 1px 0px 0px #bcd2b9,
+                inset -1px -1px 0px 0px #3e6d39;
+}
+
+#main-event .button:hover .button-text {
+    left: 0;
+    top: 0;
+
+    color: white;
+    text-shadow: none;
+}
+
+#main-event .button:active {
+    background-position: 0 70px;
+    box-shadow: none;
+
+    box-shadow: inset 1px 1px 0 0 #6ca466;
+
+    border: 1px solid #9cc496;
+}
+
+#main-event .button:active .button-text {
+    left: 1px;
+    top: 1px;
+
+    color: white;
+    text-shadow: 0 0 16px rgba(255, 255, 255, 0.5);
+}
+
+#main-event .countdown,
+#main-event .datetime {
+    color: #434343;
+    font-size: 1.8em;
+    font-weight: bold;
+    position: absolute;
+    bottom: 1.2em;
+    left: 50%;
+    margin-left: 0.5em;
+}
+
+#main-event .datetime {
+    bottom: 0.2em;
+}
+
+#main-event .event > footer {
+    bottom: 20px;
+
+    width: 66%;
+    height: 0;
+
+    position: absolute;
+    clear: both;
+}

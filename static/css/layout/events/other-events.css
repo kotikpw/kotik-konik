@@ -1,0 +1,115 @@
+#other-events {
+    font-family: "Trebuchet MS", "Trebuchet", "Helvetica", sans-serif;
+
+    width: 1080px;
+
+    margin: auto;
+}
+
+#other-events > footer {
+    margin-bottom: 1em;
+    clear: both;
+}
+
+#other-events .event {
+    margin: 0 1em 1em 1em;
+    color: #434343;
+    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.2);
+
+    -webkit-transition: left 0.1s, top 0.1s, box-shadow 0.1s;
+    -moz-transition: left 0.1s, top 0.1s, box-shadow 0.1s;
+    -o-transition: left 0.1s, top 0.1s, box-shadow 0.1s;
+    -ms-transition: left 0.1s, top 0.1s, box-shadow 0.1s;
+    transition: left 0.1s, top 0.1s, box-shadow 0.1s;
+}
+
+#other-events .event-pic {
+    -webkit-transition: margin-left 0.1s, margin-top 0.1s;
+    -moz-transition: margin-left 0.1s, margin-top 0.1s;
+    -o-transition: margin-left 0.1s, margin-top 0.1s;
+    -ms-transition: margin-left 0.1s, margin-top 0.1s;
+    transition: margin-left 0.1s, margin-top 0.1s;
+}
+
+#other-events .event .content {
+    float: left;
+}
+
+#other-events .event .content header {
+    font-size: 1.3em;
+    text-align: left;
+}
+
+#other-events .event footer {
+    height: 0;
+    clear: both;
+}
+
+#other-events .event .footer {
+    clear: both;
+}
+
+#other-events .event-pic {
+    top: 16px;
+    right: 16px;
+
+    position: absolute;
+    border: 4px solid white;
+    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.3);
+
+    -webkit-transition: top 0.1s, right 0.1s, box-shadow 0.1s;
+    -moz-transition: top 0.1s, right 0.1s, box-shadow 0.1s;
+    -o-transition: top 0.1s, right 0.1s, box-shadow 0.1s;
+    -ms-transition: top 0.1s, right 0.1s, box-shadow 0.1s;
+    transition: top 0.1s, right 0.1s, box-shadow 0.1s;
+}
+
+.events-wrapper {
+    width: 50%;
+}
+
+#past-events {
+    float: left;
+}
+
+#future-events {
+    float: right;
+}
+
+.events-wrapper > header,
+.events-wrapper > footer {
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.events-wrapper header {
+    margin-bottom: 0.5em;
+}
+
+.go-to-event {
+    display: block;
+    padding: 0;
+}
+
+.go-to-event:hover .event {
+    top: -2px;
+    left: -2px;
+
+    box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.2) !important;
+
+    background: white;
+}
+
+.go-to-event:hover .event-pic {
+    top: 12px !important;
+    right: 20px !important;
+
+    box-shadow: 5px 6px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.more.button {
+    font-family: "Trebuchet MS", "Trebuchet", "Helvetica", sans-serif;
+
+    font-size: 0.75em;
+    font-weight: normal;
+}

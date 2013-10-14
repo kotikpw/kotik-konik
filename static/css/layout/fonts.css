@@ -1,0 +1,15 @@
+@font-face {
+    font-family: Designosaur;
+    font-weight:normal;
+    font-style:normal;
+    font-variant:normal;
+    src: url(../fonts/Designosaur-Regular.ttf);
+}
+
+@font-face {
+    font-family: Designosaur;
+    font-weight:normal;
+    font-style: italic;
+    font-variant:normal;
+    src: url(../fonts/Designosaur-Italic.ttf);
+}

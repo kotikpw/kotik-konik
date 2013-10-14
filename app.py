@@ -37,7 +37,7 @@ render = render_jinja('static', encoding = 'utf-8')
 
 class Home:
     def GET(self):
-        return render.index()
+        return render.index_sea()
 
 class Register:
     def POST(self):
