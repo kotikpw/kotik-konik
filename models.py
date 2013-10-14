@@ -27,7 +27,6 @@ class User(Base):
     wants_to_learn = Column(String)
     willingness_to_attend_meetings = Column(String)
     active = Column(Boolean, nullable=False, default=False)
-    given_answers = relationship("GivenAnswer")
 
     def __init__(self, firstname, lastname, nickname, email):
         self.firstname = firstname
@@ -90,20 +89,6 @@ class Answer(Base):
 
     def __repr__(self):
        return "<Answer('%i', '%i')>" % (self.id, self.question_id)
-
-class GivenAnswer(Base):
-    __tablename__ = 'givenanswers'
-
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('users.uid'))
-    answer_id = Column(Integer, ForeignKey('answers.id'))
-
-    def __init__(self, answer_id):
-	self.answer_id = answer_id
-
-    def __repr__(self):
-       return "<GivenAnswer('%i', '%i')>" % (self.id, self.answer_id)
-
 
 users_table = User.__table__
 questions_table = Question.__table__
