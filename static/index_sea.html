@@ -31,16 +31,21 @@
         </header>
         <section id="main-event">
             <article class="event">
-  {% if success is defined %}
+  {% for info_msg in info %}
+  <div class="alert alert-info">
+    {{ info_msg }}
+  </div>
+  {% endfor %}
+  {% for success in successes %}
   <div class="alert alert-success">
     {{ success }}
   </div>
-  {% endif %}
-  {% if error is defined %}
+  {% endfor %}
+  {% for error in errors %}
   <div class="alert alert-error">
     {{ error }}
   </div>
-  {% endif %}
+  {% endfor %}
   {% block context %}
   {% endblock %}
             </article>
