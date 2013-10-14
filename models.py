@@ -81,7 +81,6 @@ class Answer(Base):
     answer = Column(String, nullable=False)
     correct = Column(Boolean, nullable=False, default=False)
     question_id = Column(Integer, ForeignKey('questions.id'))
-    given_answers = relationship("GivenAnswer")
 
     def __init__(self, answer, correct):
 	self.answer = answer
@@ -93,8 +92,6 @@ class Answer(Base):
 users_table = User.__table__
 questions_table = Question.__table__
 answers_table = Answer.__table__
-given_answers_table = GivenAnswer.__table__
-metadata = Base.metadata
 metadata = Base.metadata
 
 if __name__ == "__main__":

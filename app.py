@@ -8,6 +8,7 @@ from web.contrib.template import render_jinja
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.exc import IntegrityError
 from base64 import b64decode
+from random import shuffle
 
 from models import *
 
@@ -16,6 +17,7 @@ urls = ('/', 'RedirectHome', prefix, 'RedirectHome',
         prefix + '/', 'Home',
         prefix + '/register', 'Register',
         prefix + '/quiz', 'Quiz',
+        prefix + '/ranking', 'Ranking',
         prefix + '/avatar/(.*)', 'Avatar')
 
 def sqlalchemy_processor(handler):
@@ -125,7 +127,7 @@ class Register:
             new_user.willingness_to_meet = i.imeet
 	new_user.active = True
 	profile_progress = new_user.get_profile_progress_in_percents()
-        
+
         try:
             context.orm.add(new_user)
             context.orm.commit()
@@ -224,9 +226,20 @@ class Quiz:
 
 		if all_correct:
 			user.quiz_points += 10
-	
+
 	context.orm.add(user)
-	return render.quiz(question_list=i.get('answer'))
+	return web.seeother('%s/ranking?u=%i' % (prefix, user.uid))
+
+class Ranking:
+	def GET(self):
+		i = web.input(_method='get',u=-1)
+		users = context.orm.query(User).order_by("quiz_points desc")
+		try:
+			uid = int(i.get('u'))
+		except Exception:
+			uid = -1
+		
+		return render.ranking(users=users, uselected=uid)
 
 app.add_processor(sqlalchemy_processor)
 
