@@ -64,7 +64,7 @@ class Answer(Base):
 	self.correct = correct
 
     def __repr__(self):
-       return "<Answer('%i', '%i')>" % (self.aid, self.question_id)
+       return "<Answer('%i', '%i')>" % (self.id, self.question_id)
 
 class GivenAnswer(Base):
     __tablename__ = 'givenanswers'
@@ -78,7 +78,7 @@ class GivenAnswer(Base):
 	self.checked = checked
 
     def __repr__(self):
-       return "<GivenAnsert('%i', '%i', '%i')>" % (self.id, self.user_id, self.answers_id)
+       return "<GivenAnswer('%i')>" % (self.id)
 
 
 users_table = User.__table__

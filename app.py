@@ -115,6 +115,26 @@ class Quiz:
 	question_list = self.generate_quesions()
         return render.quiz(question_list=question_list)
 
+    def POST(self):
+        i = web.input(answer=[])
+        firstname = i.get('firstname')
+        lastname = i.get('lastname')
+        nickname = i.get('nickname')
+        email = i.get('email')
+        new_user = User(firstname, lastname, nickname, email)
+       
+       	given_answers = []
+		
+	#user.given_answers = given_answers
+	for a in i.get('answer'):
+		#ga = GivenAnswer(1)
+		#ga.answers_id = context.orm.query(Answer).filter(Answer.id==int(a)).first(), 1))
+		#given_answers.append(ga)
+		pass
+	
+	print given_answers
+	return render.quiz(question_list=i.get('answer'))
+
 app.add_processor(sqlalchemy_processor)
 
 if __name__ == "__main__":
