@@ -1,31 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
+<html>
+    <head>
+        <title>Kotik Template Prototype</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>Koło Otwartych Technologii i Komputerów</title>
+        <script src="/static/js/kotik.js"></script>
+        <link rel="stylesheet" href="/static/css/some-bootstrap.css">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/static/css/style.css" />
-<link rel="stylesheet" href="/static/css/bootstrap.css">
-<link rel="stylesheet" href="/static/css/kotik.css" />
-<script src="/static/js/kotik.js"></script>
+        <link rel="stylesheet" href="/static/css/kotik.css" />
+        <link rel="stylesheet" href="/static/css/layout/reset.css" />
+        <link rel="stylesheet" href="/static/css/layout/fonts.css" />
+        <link rel="stylesheet" href="/static/css/layout/main.css" />
+        <link rel="stylesheet" href="/static/css/layout/events/main-event.css" />
+        <link rel="stylesheet" href="/static/css/layout/events/other-events.css" />
 
-<!--[if lt IE 9]>
-	<script src="/static/js/respond.min.js"></script>
-	<link rel="stylesheet" href="/static/css/ie.css" />
-<![endif]-->
+        <!--[if IE]>
+        <link rel="stylesheet" href="css/ie-fix.css" />
+        <![endif]-->
+    </head>
+    <body>
+        <header id="main-header">
+            <div id="header-content">
+                <div id="header-info">
+                    <a href="#" id="home">
+                        <h1>Koło Otwartych Technik Informacyjnych i Komputerowych</h1>
+                        <div id="logo">KOTIK</div>
+                    </a>
 
-</head>
-<body>
-
-<div class="container">
-  <header>
-    <h1>Kotik - Test wielokrotnego wyboru</h1>
-    <p><a href="http://kotik.iem.pw.edu.pl">kotik.iem.pw.edu.pl</a>
-  </header>
-
-  {% if error is defined %}
+<!--
+                    <nav>
+                        <ul>
+                            <li class="active"><a href="#">O kole</a></li>
+                            <li><a href="#">Wiki</a></li>
+                            <li><a href="#">Dołącz</a></li>
+                            <li><a href="#">Newsletter</a></li>
+                        </ul>
+                    </nav>
+                    <div id="lang-switch">
+                        <a href="#">English</a>
+                    </div>
+-->
+                </div>
+            </div>
+        </header>
+        <section id="main-event">
+            <article class="event">
+                {% if error is defined %}
   <div class="alert alert-error">
     {{ error }}
   </div>
@@ -48,7 +68,6 @@
                 <div class="answers">
                     <input type="checkbox" name="{{ q.id }}" value="{{ a.id }}"> {{ a.answer }}
                 </div>
-		{{ loop.cycle('', '<br/>') }}
 	    {% endfor %}
 	</div>
     </div>
@@ -58,5 +77,12 @@
       <button type="button" class="btn">Rezygnuję</button>
     </div>
   </form>
+
+            </article>
+        </section>
+        
+        <footer>
+            Copyright © 2013 – Template by <a href="#">KOTIK</a> on the <a href="#">GPLv3</a> license.
+        </footer>
 </body>
 </html>
