@@ -37,24 +37,32 @@ class HeadRequest(urllib2.Request):
         return "HEAD"
 
 def check_url(url):
-    request = HeadRequest(url)
-    response = urllib2.urlopen(request)
+    request = HeadRequest(url, headers={'User-Agent' : 'Kotik registration bot'})
+    try:
+        response = urllib2.urlopen(request)
+    except urllib2.HTTPError, e:
+        return False
     valid = response.getcode() == 200
     if not valid:
         print "Response code: %d" % response.getcode()
     return valid
 
 def check_github_username(github_username):
+    if github_username is None or not len(github_username):
+        return False
     if check_url('https://github.com/%s' % github_username):
         return True
     return False
 
 def check_reddit_username(reddit_username):
+    if reddit_username is None or not len(reddit_username):
+        return False
     if check_url('http://www.reddit.com/user/%s' % reddit_username):
         return True
     return False
 
 def check_linux_distribution(linux_distribution):
+
     if check_url('http://distrowatch.com/table.php?distribution=%s' % linux_distribution):
         return True
     return False
