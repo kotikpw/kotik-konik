@@ -1,17 +1,24 @@
 // Put event listeners into place
 window.addEventListener("DOMContentLoaded", function() {
 	// Grab elements, create settings, etc.
-	var canvas = document.getElementById("canvas"),
-	context = canvas.getContext("2d"),
-	video = document.getElementById("video"),
-	videoObj = { "video": true },
-	errBack = function(error) { console.log("Video capture error: ", error.code); video.className = 'hidden';};
-        nonDefaultImage = false;
-	unknownImage = new Image;
+	var canvas = document.getElementById("canvas");
+	if (!canvas)
+		return;
+
+        var context = canvas.getContext("2d");
+        var video = document.getElementById("video");
+        var videoObj = { "video": true };
+        var errBack = function(error) {
+		console.log("Video capture error: ", error.code); video.className = 'hidden';
+	};
+        var nonDefaultImage = false;
+	var unknownImage = new Image;
+
 	unknownImage.onload = function() {
 		context.drawImage(unknownImage, 0, 0, 265, 200);
 	};
 	unknownImage.src = "avatar/";
+
 	// Put video listeners into place
 	if(navigator.getUserMedia) { // Standard
 		navigator.getUserMedia(videoObj, function(stream) {
