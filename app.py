@@ -12,7 +12,8 @@ from random import shuffle
 from models import *
 
 prefix = '/konik'
-urls = (prefix + '/', 'Home',
+urls = ('/', 'RedirectHome', prefix, 'RedirectHome',
+        prefix + '/', 'Home',
         prefix + '/register', 'Register',
         prefix + '/quiz', 'Quiz',
         prefix + '/avatar/(.*)', 'Avatar')
@@ -34,6 +35,10 @@ def sqlalchemy_processor(handler):
 app = application(urls, globals())
 wsgi = app.wsgifunc()
 render = render_jinja('static', encoding = 'utf-8')
+
+class RedirectHome:
+    def GET(self):
+        raise web.seeother(prefix + '/')
 
 class Home:
     def GET(self):
