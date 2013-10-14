@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<title>Koło Otwartych Technologii i Komputerów</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/css/style.css" />
+<link rel="stylesheet" href="/static/css/bootstrap.css">
+<link rel="stylesheet" href="/static/css/kotik.css" />
+<script src="/static/js/kotik.js"></script>
+
+<!--[if lt IE 9]>
+	<script src="/static/js/respond.min.js"></script>
+	<link rel="stylesheet" href="/static/css/ie.css" />
+<![endif]-->
+
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Kotik - Test wielokrotnego wyboru</h1>
+    <p><a href="http://kotik.iem.pw.edu.pl">kotik.iem.pw.edu.pl</a>
+  </header>
+
+  {% if error is defined %}
+  <div class="alert alert-error">
+    {{ error }}
+  </div>
+  {% endif %}
+  <form id="registration" class="form-horizontal" method="POST">
+    <div class="control-group">
+      <label class="control-label" for="firstname">Nazywam się</label>
+      <div class="controls">
+        <input type="text" id="firstname" name="firstname" placeholder="Imię">
+        <input type="text" id="lastname" name="lastname" placeholder="Nazwisko">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="nickname">Ale mówią na mnie</label>
+      <div class="controls">
+        <input type="text" id="nickname" name="nickname" placeholder="Nick">
+        <input type="email" id="email" name="email" placeholder="E-mail">
+      </div>
+    </div>
+    {% for q in question_list %}
+    <div class="control-group">
+	<div class="controls question">
+            {{ loop.index }}. {{ q.question }} {{ q.value }}
+	</div>
+	<div class="controls">
+	    {% for a in q.answers %}
+                <div class="answers">
+                    <input type="checkbox" name="answer" value="{{ a.id }}"> {{ a.answer }}
+                </div>
+		{{ loop.cycle('', '<br/>') }}
+	    {% endfor %}
+	</div>
+    </div>
+    {% endfor %}
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Wyślij odpowiedzi</button>
+      <button type="button" class="btn">Rezygnuję</button>
+    </div>
+  </form>
+</body>
+</html>
