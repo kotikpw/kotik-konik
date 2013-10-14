@@ -94,7 +94,10 @@ class Register:
             context.orm.commit()
         except IntegrityError, e:
             context.orm.rollback()
-            return render.registration(error=u"Podany e-mail jest już zajęty")
+            if email is None:
+                return render.registration(error=u"Podaj adres e-mail")
+            else:
+                return render.registration(error=u"Podany e-mail jest już zajęty")
         return render.success(firstname=firstname, lastname=lastname, nickname=nickname, email=email, \
 				success=u"Witaj %s!" % nickname, \
 				profile_progress=new_user.get_profile_progress_in_percents())
