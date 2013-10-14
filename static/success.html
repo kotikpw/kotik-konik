@@ -1,28 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
+{% extends "index_sea.html" %}
 
-<title>Koło Otwartych Technologii i Komputerów</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="static/css/style.css" />
-<link rel="stylesheet" href="static/css/bootstrap.css">
-<script src="static/js/kotik.js"></script>
-
-<!--[if lt IE 9]>
-	<script src="static/js/respond.min.js"></script>
-	<link rel="stylesheet" href="static/css/ie.css" />
-<![endif]-->
-
-</head>
-<body>
-	
-<div class="container">
-  <header>
-    <h1>Kotik</h1>
-    <p><a href="http://kotik.iem.pw.edu.pl">kotik.iem.pw.edu.pl</a>
-  </header>
+{% block context %}
 
   <h1>Witamy z nami!</h1>
 
@@ -31,5 +9,4 @@
 
   <p>W wolnej chwili odwiedź naszą <a href="http://kotik.iem.pw.edu.pl">stronę internetową</a>.<p>
 
-</body>
-</html>
+{% endblock %}
