@@ -57,7 +57,7 @@ class Register:
         i = web.input()
         firstname = empty_or_none(i.get('firstname'), default='Andrzej')
         lastname = empty_or_none(i.get('lastname'), default='Molibdenowy')
-        nickname = empty_or_none(i.get('nickname'), default='calkiem_nikt')
+        nickname = empty_or_none(i.get('nickname'), default='nie_wiadomo_kto')
         email = empty_or_none(i.get('email'))
 
 	new_user = context.orm.query(User).filter_by(email=email).filter_by(active=False).first()
