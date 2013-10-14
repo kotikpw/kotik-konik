@@ -10,6 +10,7 @@ Zależności
 * sqlalchemy (pip install sqlalchemy)
 * sqlite3 (apt-get install sqlite3)
 * webpy (pip install webpy)
+* urllib2 (pip install urllib3) <-- (sic!)
 
 Instalacja
 ==========
