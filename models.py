@@ -35,6 +35,29 @@ class User(Base):
         self.nickname = nickname
         self.email = email
 
+    def get_profile_progress_in_percents(self):
+        profile_points = 10
+        total_profile_points = 85
+        if self.avatar:
+            profile_points += 10
+        if self.university:
+            profile_points += 5
+        if self.faculty:
+            profile_points += 5
+        if self.year_of_study:
+            profile_points += 5
+        if self.github_username:
+            profile_points += 15
+        if self.reddit_username:
+            profile_points += 15
+        if self.linux_distribution:
+            profile_points += 10
+        if self.known_technologies:
+            profile_points += 5
+        if self.wants_to_learn:
+            profile_points += 5
+        return 100.0 * profile_points/total_profile_points
+
     def __repr__(self):
        fullname = "%s %s" % (self.firstname, self.lastname)
        return "<User('%s', '%s', '%s')>" % (fullname, self.nickname, self.email)
