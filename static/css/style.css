@@ -34,6 +34,3 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   .four-three { width: 73%; }
   .three-one .row, .three-one .col, .three-two .row, .three-two .col, .three-three .row, .three-three .col, .four-one .row, .four-one .col, .four-two .row, .four-two .col, .four-three .row, .four-three .col, .four-four .row, .four-four .col { margin: 0%; }
   .three-one .col, .three-two .col, .three-three .col, .four-one .col, .four-two .col, .four-three .col, .four-four .col { margin: 0 1%; } }
-
-.answers {float: left; width: 300px; margin-bottom: 2px;}
-.question{margin-bottom: 5px; font-weight: bold;}
