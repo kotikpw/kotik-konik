@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", function() {
 	unknownImage.onload = function() {
 		context.drawImage(unknownImage, 0, 0, 265, 200);
 	};
-	unknownImage.src = "/avatar/";
+	unknownImage.src = "avatar/";
 	// Put video listeners into place
 	if(navigator.getUserMedia) { // Standard
 		navigator.getUserMedia(videoObj, function(stream) {
