@@ -7,7 +7,6 @@ from web.contrib.template import render_jinja
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.exc import IntegrityError
 from base64 import b64decode
-from random import shuffle
 
 from models import *
 
@@ -32,9 +31,18 @@ def sqlalchemy_processor(handler):
     finally:
         context.orm.commit()
 
+def empty_or_none(value, default=None):
+    if not value or not len(value):
+        return default
+    return value
+
+def percents(value):
+    return '%.0f%%' % value
+
 app = application(urls, globals())
 wsgi = app.wsgifunc()
 render = render_jinja('static', encoding = 'utf-8')
+render._lookup.filters.update({'percents':percents})
 
 class RedirectHome:
     def GET(self):
@@ -47,10 +55,10 @@ class Home:
 class Register:
     def POST(self):
         i = web.input()
-        firstname = i.get('firstname')
-        lastname = i.get('lastname')
-        nickname = i.get('nickname')
-        email = i.get('email')
+        firstname = empty_or_none(i.get('firstname'), default='Andrzej')
+        lastname = empty_or_none(i.get('lastname'), default='Molibdenowy')
+        nickname = empty_or_none(i.get('nickname'), default='calkiem_nikt')
+        email = empty_or_none(i.get('email'))
 
 	new_user = context.orm.query(User).filter_by(email=email).filter_by(active=False).first()
 	if new_user == None:
@@ -87,7 +95,9 @@ class Register:
         except IntegrityError, e:
             context.orm.rollback()
             return render.registration(error=u"Podany e-mail jest już zajęty")
-        return render.success(email=email)
+        return render.success(firstname=firstname, lastname=lastname, nickname=nickname, email=email, \
+				success=u"Witaj %s!" % nickname, \
+				profile_progress=new_user.get_profile_progress_in_percents())
 
 class Avatar:
     def _avatar_as_bytestream_if_available(self, avatar):
