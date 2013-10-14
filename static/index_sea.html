@@ -31,7 +31,12 @@
         </header>
         <section id="main-event">
             <article class="event">
-                {% if error is defined %}
+  {% if success is defined %}
+  <div class="alert alert-success">
+    {{ success }}
+  </div>
+  {% endif %}
+  {% if error is defined %}
   <div class="alert alert-error">
     {{ error }}
   </div>
