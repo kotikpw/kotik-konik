@@ -46,7 +46,15 @@ class Register:
         lastname = i.get('lastname')
         nickname = i.get('nickname')
         email = i.get('email')
-        new_user = User(firstname, lastname, nickname, email)
+
+	new_user = context.orm.query(User).filter_by(email=email).filter_by(active=False).first()
+	if new_user == None:
+		new_user = User(firstname, lastname, nickname, email)
+	else:
+	    new_user.firstname = firstname
+	    new_user.lastname = lastname
+	    new_user.nickname = nickname
+	    new_user.email = email
         if i.has_key('avatar'):
             new_user.avatar = i.avatar
         if i.has_key('university'):
@@ -67,6 +75,7 @@ class Register:
             new_user.wants_to_learn = i.ineed
         if i.has_key('imeet'):
             new_user.willingness_to_meet = i.imeet
+	new_user.active = True
         try:
             context.orm.add(new_user)
             context.orm.commit()
@@ -121,18 +130,21 @@ class Quiz:
         lastname = i.get('lastname')
         nickname = i.get('nickname')
         email = i.get('email')
-        new_user = User(firstname, lastname, nickname, email)
+        
+	user = context.orm.query(User).filter_by(email=email).first()
+	if user == None:
+		user = User(firstname, lastname, nickname, email)
        
        	given_answers = []
 		
-	#user.given_answers = given_answers
 	for a in i.get('answer'):
-		#ga = GivenAnswer(1)
-		#ga.answers_id = context.orm.query(Answer).filter(Answer.id==int(a)).first(), 1))
-		#given_answers.append(ga)
-		pass
+		ga = GivenAnswer(1)
+		# todo excpetion
+		ga.answers_id = int(a) 
+		given_answers.append(ga)
 	
-	print given_answers
+	user.given_answers = given_answers
+	context.orm.add(user)
 	return render.quiz(question_list=i.get('answer'))
 
 app.add_processor(sqlalchemy_processor)

@@ -25,6 +25,7 @@ class User(Base):
     known_technologies = Column(String)
     wants_to_learn = Column(String)
     willingness_to_attend_meetings = Column(String)
+    active = Column(Boolean, nullable=False, default=False)
     given_answers = relationship("GivenAnswer")
 
     def __init__(self, firstname, lastname, nickname, email):
