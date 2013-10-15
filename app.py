@@ -193,14 +193,14 @@ class Quiz:
         i = web.input(answer=[])
         nickname = i.get('nickname')
         email = i.get('email')
-        
+
 	user = context.orm.query(User).filter_by(email=email).first()
 	if user is None:
 		user = User('', '', nickname, email)
 
-        user.quiz_points = 0  
+        user.quiz_points = 0
 	user.given_answers = []
-        
+
         form_keys = i.keys()
 
 	for question_key in form_keys:
@@ -235,8 +235,11 @@ class Quiz:
 		if all_correct:
 			user.quiz_points += 10
 
+		user.given_answers.append(GivenAnswer(question_id))
+
 	context.orm.add(user)
-	return web.seeother('%s/ranking?u=%i' % (prefix, user.uid))
+	user = context.orm.query(User).filter_by(email=user.email).first()
+	return web.seeother('/konik/ranking?u=%i' % user.uid)
 
 class Ranking:
 	def GET(self):

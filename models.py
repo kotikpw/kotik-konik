@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
+import datetime
 
 engine = create_engine('sqlite:///kotik.db', echo=True)
 
@@ -25,6 +26,7 @@ class User(Base):
     linux_distribution = Column(String)
     known_technologies = Column(String)
     wants_to_learn = Column(String)
+    given_answers = relationship("GivenAnswer")
     willingness_to_attend_meetings = Column(String)
     active = Column(Boolean, nullable=False, default=False)
 
@@ -81,6 +83,7 @@ class Answer(Base):
     answer = Column(String, nullable=False)
     correct = Column(Boolean, nullable=False, default=False)
     question_id = Column(Integer, ForeignKey('questions.id'))
+    given_answers = relationship("GivenAnswer")
 
     def __init__(self, answer, correct):
 	self.answer = answer
@@ -89,9 +92,26 @@ class Answer(Base):
     def __repr__(self):
        return "<Answer('%i', '%i')>" % (self.id, self.question_id)
 
+class GivenAnswer(Base):
+	__tablename__ = 'givenanswers'
+
+	id = Column(Integer, primary_key=True)
+	user_id = Column(Integer, ForeignKey('users.uid'))
+	answer_id = Column(Integer, ForeignKey('answers.id'))
+	datetime = Column(DateTime, default=datetime.datetime.now)
+
+	def __init__(self, answer_id):
+		self.answer_id = answer_id
+
+	def __repr__(self):
+		return "<GivenAnswer('%i', '%i')>" % (self.id, self.answer_id)
+
+
+
 users_table = User.__table__
 questions_table = Question.__table__
 answers_table = Answer.__table__
+given_answers_table = GivenAnswer.__table__
 metadata = Base.metadata
 
 if __name__ == "__main__":
