@@ -1,0 +1,21 @@
+{% extends "index_sea.html" %}
+
+{% block context %}
+<h1>Ranking</h1><br/>
+<ul>
+{% for u in users %}
+	<li
+	{% if u.uid == uselected %}
+	    class="uselected"
+	{% endif %}
+	>
+	{{ loop.index }}. 
+	{% if u.nickname|striptags %}
+		{{ u.nickname|striptags }}
+	{% else %}
+		Anonymous
+	{% endif %}
+	- {{ u.quiz_points }}</li>
+{% endfor %}
+</ul>
+{% endblock %}
