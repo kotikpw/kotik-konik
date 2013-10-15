@@ -217,7 +217,6 @@ class Quiz:
 		if question is None:
 			continue
 
-		all_correct = True
 		for answer_key in i.get(question_key):
 			try:
 				answer_id = int(answer_key)
@@ -225,17 +224,16 @@ class Quiz:
 				pass
 
 			if answer_id is None:
-				all_correct = False
 				continue
 
-                        answer = context.orm.query(Answer).filter_by(id=answer_id).first()
-                        if answer is None or answer.correct == False:
-				all_correct = False
+			user.given_answers.append(GivenAnswer(answer_id))
 
-		if all_correct:
-			user.quiz_points += 10
-
-		user.given_answers.append(GivenAnswer(question_id))
+		taba = [x.answer_id for x in user.given_answers]
+		for answers in question.answers:
+			if answers.id in taba and answers.correct == True:
+				user.quiz_points += 10
+			elif answers.id not in taba and answers.correct == False:
+				user.quiz_points += 10
 
 	context.orm.add(user)
 	user = context.orm.query(User).filter_by(email=user.email).first()
@@ -249,7 +247,7 @@ class Ranking:
 			uid = int(i.get('u'))
 		except Exception:
 			uid = -1
-		
+
 		return render.ranking(users=users, uselected=uid)
 
 app.add_processor(sqlalchemy_processor)
